@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = (props) => {
+const SearchPanel = (props) => {
 	return (
 		<>
 			<input type="text" name="Search" placeholder="Type query here" value={props.search} onChange={props.onChange}></input><br></br>
@@ -9,4 +9,4 @@ const Search = (props) => {
 	)
 }
 
-export default Search;
+export default SearchPanel;

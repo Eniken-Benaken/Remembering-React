@@ -1,7 +1,6 @@
-import Search from './Search';
+import SearchPanel from './SearchPanel';
 import ProductPlace from './ProductPlace';
-import { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 
 const Store = (props) => {
 	const [stockOnly,setStockOnly] = new useState(false);
@@ -46,7 +45,7 @@ const Store = (props) => {
 
 	return (
 		<>
-			<Search seach={search} stockOnly={stockOnly} onChange={handleChange} />
+			<SearchPanel seach={search} stockOnly={stockOnly} onChange={handleChange} />
 			<ProductPlace data={filteredData}/>
 		</>
 	)

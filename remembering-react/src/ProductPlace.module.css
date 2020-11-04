@@ -1,0 +1,16 @@
+/* .tableHeaders {
+	width: 200px;
+} */
+
+tr > th {
+	text-align: start;
+}
+
+tr > th:nth-child(2), .productPrice {
+  text-align: end;
+}
+
+.categoryRow {
+	padding-left: 10px;
+}
+

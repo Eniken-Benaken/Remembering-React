@@ -1,9 +1,9 @@
 import React from 'react';
+import s from './ProductPlace.module.css';
 
 const ProductPlace = (props) => {
-	console.log(props.data);
 	let categoriesNames = [];
-	let categories = [];
+	let categoriesAvailable = [];
 	if(props.data !== undefined) {
 		let set = new Set();
 		for(let item of props.data) {
@@ -16,42 +16,43 @@ const ProductPlace = (props) => {
 				if(entry.category === item) return true;
 				else return false;
 			})
-			categories.push(<Category key={item} category={item} items={items} />);
+			categoriesAvailable.push(<Category key={item} category={item} items={items} />);
 		}
 
 		return(
-			<div className="ProductPlace">
-				<table className="name-price">
-					<thead>
+			<div className="productPlace">
+				<table className="products">
+					<thead className={s.tableHeaders}>
 						<tr>
 							<th>Name</th>
 							<th>Price</th>
 						</tr>
 					</thead>
 				</table>
-				{categories}
+				{categoriesAvailablea}
 			</div>
 		)
 	}	
 }
 
-const CategoryRow = props => {
+const ProductCategoryRow = props => {
 	if(props.rowName) {
 		return(
 			<tr>
-				<th>{props.rowName}</th>
+				<th className={s.categoryRow}>{props.rowName}</th>
 			</tr>
 		)
 	}
 	else throw new Error("No category provided");
 };
 
-const ItemRow = props => {
+const ProductRow = props => {
+	let redIfNotStocked = props.stocked ? null : {"color" : "red"};
 	if(props.name && props.price) {
 		return(
-			<tr>
+			<tr style={redIfNotStocked}>
 				<td>{props.name}</td>
-				<td>{props.price}</td>
+				<td className={s.productPrice}>{props.price}</td>
 			</tr>
 		)
 	}
@@ -60,10 +61,10 @@ const ItemRow = props => {
 
 const Category = (props) => {
 	if(props.category) {
-		const category = <CategoryRow key={props.category} rowName={props.category} />;
+		const category = <ProductCategoryRow key={props.category} rowName={props.category} />;
 		let items = []
 		for(let item of props.items) {
-			items.push(<ItemRow key={item.name} name={item.name} price={item.price} />)
+			items.push(<ProductRow key={item.name} name={item.name} price={item.price} stocked={item.stocked} />)
 		}
 
 		return (
